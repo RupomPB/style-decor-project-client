@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary:#3BAFDB;
+  --color-secondary: black;
+    --color-base-100: #ffffff;  /* main background */
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+
+  --color-base-content: #020617; /* text color */
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+
+--color-primary: #3BAFDB;   /* same brand color */
+--color-secondary: #94a3b8; /* soft gray instead of pure white */
+
+  
+  --color-base-100: #020617;  /* dark background */
+  --color-base-200: #020617;
+  --color-base-300: #0f172a;
+
+  --color-base-content: #e5e7eb; /* light text */
+}
+
+
+.sand {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
