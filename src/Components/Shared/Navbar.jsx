@@ -56,10 +56,10 @@ const Navbar = () => {
       {/* conditional if user unavailable */}
       {!user && (
         <>
-          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/login">
+          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="auth/login">
             <li>Login </li>
           </NavLink>
-          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/register">
+          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="auth/register">
             <li>Register </li>
           </NavLink>
         </>
@@ -149,7 +149,7 @@ const Navbar = () => {
                 <li className="mt-2">
                   <button
                     onClick={handleLogout}
-                    className="btn btn-outline btn-sm bg-linear-to-r from-[#db28eb] to-[#e84646]  text-white"
+                    className="btn btn-outline btn-sm bg-primary text-white"
                   >
                     Logout
                   </button>
@@ -157,7 +157,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to="/login" className="btn bg-secondary text-base-100  bg-linear-to-r from-[#db28eb] to-[#e84646]">
+            <Link to="/login" className="btn  text-base-100  bg-primary">
               Login
             </Link>
           )}

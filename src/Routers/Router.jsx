@@ -4,6 +4,8 @@ import Registration from "../Pages/Auth/Registration";
 import AuthLayout from "../Layouts/Auth/AuthLayout";
 import Home from "../Pages/Home/Home";
 import HomeLayout from "../Layouts/Home/HomeLayout";
+import About from './../Pages/About';
+import Contact from "../Pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -12,8 +14,17 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: '/',
         element: <Home></Home>,
       },
+      {
+        path: '/about',
+        element: <About></About>
+      },
+      {
+        path: '/contact',
+        element: <Contact></Contact>
+      }
     ],
   },
   {
@@ -22,10 +33,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path:'login',
         element: <Login></Login>,
       },
       {
-        path: "registration",
+        path: "register",
         element: <Registration></Registration>,
       },
     ],
