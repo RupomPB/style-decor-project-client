@@ -17,7 +17,7 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
-
+ 
     // sign in user
     const signInUser =(email, password)=>{
         setLoading(true)
@@ -36,8 +36,8 @@ const logoutUser =()=>{
 }
 
     // update userinfo
-    const userInfo =(updatedData)=>{
-        return updateProfile(auth.currentUser, updatedData)
+    const updataUserProfile =(profile)=>{
+        return updateProfile(auth.currentUser, profile)
     }
 
     // observer
@@ -45,6 +45,7 @@ const logoutUser =()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             setUser(currentUser);
             setLoading(false)
+            console.log(currentUser)
         })
 
         return ()=>{
@@ -61,7 +62,7 @@ const logoutUser =()=>{
         signInWithGoogle,
         signInUser,
         logoutUser,
-        userInfo,
+        updataUserProfile,
         user,
         loading,
         setUser,

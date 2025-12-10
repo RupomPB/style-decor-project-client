@@ -3,7 +3,7 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary:#3BAFDB;
+  --color-primary:rgb(59, 175, 219);
   --color-secondary: black;
     --color-base-100: #ffffff;  /* main background */
   --color-base-200: #f1f5f9;
@@ -15,7 +15,7 @@
 @plugin "daisyui/theme" {
   name: "dark";
 
---color-primary: #3BAFDB;   /* same brand color */
+--color-primary: rgb(59, 175, 219);   /* same brand color */
 --color-secondary: #94a3b8; /* soft gray instead of pure white */
 
   
@@ -32,4 +32,9 @@
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, rgb(94, 191, 230), rgb(71, 191, 183), rgb(12, 144, 245));
+  color: white;
 }

@@ -56,10 +56,10 @@ const Navbar = () => {
       {/* conditional if user unavailable */}
       {!user && (
         <>
-          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="auth/login">
+          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/login">
             <li>Login </li>
           </NavLink>
-          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="auth/register">
+          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/register">
             <li>Register </li>
           </NavLink>
         </>
@@ -157,7 +157,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to="/login" className="btn  text-base-100  bg-primary">
+            <Link to="/login" className="btn  text-base-100  btn-gradient">
               Login
             </Link>
           )}
