@@ -5,12 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 
 const Registration = () => {
-
-
-  const { createUser, updataUserProfile } = useAuth();
+  const { createUser, updataUserProfile, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log('in the register ', location)
+  console.log("in the register ", location);
 
   const {
     register,
@@ -26,47 +24,47 @@ const Registration = () => {
       .then((result) => {
         console.log(result.user);
         const user = result.user;
-        
 
         // 1 store the img in form data
         const formData = new FormData();
-        formData.append('image', profileImg);
+        formData.append("image", profileImg);
 
-        // 2 send the photo to store 
-        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`
+        // 2 send the photo to store
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_image_host_key
+        }`;
 
-        axios.post(image_API_URL, formData)
-        .then(res =>{
-          console.log('after image upload', res.data.data.url)
+        axios.post(image_API_URL, formData).then((res) => {
+          console.log("after image upload", res.data.data.url);
 
-          // updata user profile to firebase 
-          const userProfile ={
-            displayName : data.name ,
-            photoURL: res.data.data.url
-          }
-          console.log(data.name)
+          // updata user profile to firebase
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          console.log(data.name);
 
-          updataUserProfile(user,userProfile)
-          .then(()=>{
-            console.log('user profile updated')
-            navigate(location.state || '/')
-
-          })
-          .catch(error =>{
-            console.log(error.message)
-          })
-
-        })
-
+          updataUserProfile( userProfile)
+            .then(() => {
+              console.log("user profile updated");
+              navigate(location.state || "/");
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+          setUser({ ...user, ...userProfile });
+        });
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
 
-
-  return <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl my-10">
-      <h1 className="text-center font-bold text-3xl">Welcome to Style <span className="text-primary"> Decor</span></h1>
+  return (
+    <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl my-10">
+      <h1 className="text-center font-bold text-3xl">
+        Welcome to Style <span className="text-primary"> Decor</span>
+      </h1>
       <form className="card-body" onSubmit={handleSubmit(handleRegistration)}>
         <fieldset className="fieldset">
           {/* name field */}
@@ -148,16 +146,14 @@ const Registration = () => {
           <button className="btn btn-gradient mt-4">Register</button>
           <p>
             Already have an account?{" "}
-            <Link 
-            state={location.state}
-            to="/login" className="text-blue-400">
+            <Link state={location.state} to="/login" className="text-blue-400">
               Login
             </Link>
           </p>
         </fieldset>
-        
       </form>
     </div>
+  );
 };
 
 export default Registration;
