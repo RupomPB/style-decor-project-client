@@ -6,6 +6,9 @@ import Home from "../Pages/Home/Home";
 import HomeLayout from "../Layouts/Home/HomeLayout";
 import About from './../Pages/About';
 import Contact from "../Pages/Contact";
+import ServiceMap from "../Pages/Home/Coverage";
+import Coverage from "../Pages/Home/Coverage";
+
 
 const router = createBrowserRouter([
   {
@@ -15,7 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         path: '/',
-        element: <Home></Home>,
+       Component: Home,
       },
       {
         path: 'about',
@@ -24,7 +27,12 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact></Contact>
-      }
+      },
+      // {
+      //   path: 'coverage',
+      //   Component: Coverage,
+      //   loader: ()=> fetch('/serviceCenters.json').then((res)=>res.json()),
+      // }
     ],
   },
   {
