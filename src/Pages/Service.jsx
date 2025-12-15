@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import UseAxiosSecure from "../hooks/useAxiosSecure";
+import { ArrowRight } from "lucide-react";
 
 export default function Service() {
   const axiosSecure = UseAxiosSecure();
@@ -29,82 +30,92 @@ export default function Service() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
-      {/* Heading */}
-      <div className="text-center mb-16">
+      {/* Header */}
+      <div className="mb-16 max-w-3xl">
         <h2 className="text-4xl md:text-5xl font-bold text-base-content">
-          Our <span className="text-primary">Services</span>
+          All <span className="text-primary">Decoration Services</span>
         </h2>
-        <p className="mt-4 text-base-content/70 max-w-2xl mx-auto">
-          Elegant, modern and professional decoration solutions for every occasion
+        <p className="mt-4 text-base-content/70">
+          Explore our complete range of professional decoration services, designed
+          to elevate weddings, corporate events, parties, and special occasions.
         </p>
       </div>
 
       {/* Search */}
-      <div className="max-w-md mx-auto mb-14">
+      <div className="mb-14 max-w-md">
         <input
           type="text"
-          placeholder="Search services..."
+          placeholder="Search by service name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="
-            input input-bordered w-full rounded-full
+            input input-bordered w-full
             bg-base-100 text-base-content
             border-base-300
-            focus:outline-none focus:border-primary
+            focus:border-primary
           "
         />
       </div>
 
-      {/* Cards */}
+      {/* Services List */}
       {filteredServices.length === 0 ? (
-        <p className="text-center text-base-content/60">
-          No services found
-        </p>
+        <p className="text-base-content/60">No services found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="space-y-10">
           {filteredServices.map((item, idx) => (
-            <motion.article
+            <motion.div
               key={item._id || idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              transition={{ duration: 0.5 }}
               className="
-                card bg-base-100 border border-base-300
-                shadow-md hover:shadow-xl
-                transition-all duration-300
+                flex flex-col md:flex-row gap-8
+                bg-base-100 border border-base-300
+                rounded-2xl overflow-hidden
+                shadow-sm hover:shadow-xl
+                transition-shadow
               "
             >
               {/* Image */}
-              <figure className="h-56 overflow-hidden">
+              <div className="md:w-1/3 h-64 md:h-auto overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                 />
-              </figure>
+              </div>
 
               {/* Content */}
-              <div className="card-body space-y-3">
-                <h3 className="card-title text-base-content">
-                  {item.name}
-                </h3>
+              <div className="flex-1 p-6 flex flex-col justify-between">
+                <div className="space-y-4">
+                  {/* Category */}
+                  <span className="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 px-3 py-1 rounded-full">
+                    {item.category || "Decoration"}
+                  </span>
 
-                <p className="text-sm text-base-content/70 line-clamp-2">
-                  {item.description}
-                </p>
+                  <h3 className="text-2xl font-semibold text-base-content">
+                    {item.name}
+                  </h3>
 
-                <div className="flex items-center justify-between pt-4">
-                  <span className="text-primary font-bold text-lg">
+                  <p className="text-base-content/70 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Footer */}
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="text-xl font-bold text-primary">
                     ৳ {item.price}
                   </span>
 
-                  <button className="btn btn-primary btn-sm rounded-full">
+                  <button className="group flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all">
                     View Details
+                    <ArrowRight size={16} />
                   </button>
                 </div>
               </div>
-            </motion.article>
+            </motion.div>
           ))}
         </div>
       )}
