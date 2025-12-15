@@ -13,6 +13,7 @@ import ServiceDetails from "../Pages/page/ServiceDetails";
 import Service from "../Pages/page/Service";
 import BookService from "../Pages/page/BookService";
 import MyBookings from "../Pages/Dashboard/MyBookings";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 
 
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
        path: 'my-bookings',
        element: <MyBookings></MyBookings>
+      },
+      {
+        path: 'payment/:id',
+        element: <Payment></Payment>
       }
     ]
   }
