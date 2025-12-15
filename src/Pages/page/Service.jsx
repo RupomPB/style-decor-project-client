@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import UseAxiosSecure from "../hooks/useAxiosSecure";
+
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
 
 export default function Service() {
   const axiosSecure = UseAxiosSecure();
@@ -109,10 +111,10 @@ export default function Service() {
                     ৳ {item.price}
                   </span>
 
-                  <button className="group flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all">
+                  <Link to={`/services/${item._id}`} className=" btn group flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all">
                     View Details
                     <ArrowRight size={16} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

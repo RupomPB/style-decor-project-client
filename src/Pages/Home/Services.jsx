@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 export default function Services() {
   const axiosSecure = useAxiosSecure();
@@ -35,7 +36,8 @@ export default function Services() {
           Our <span className="text-primary">Services</span>
         </h2>
         <p className="mt-4 text-base-content/70 max-w-2xl mx-auto">
-          Elegant, modern and professional decoration solutions for every occasion
+          Elegant, modern and professional decoration solutions for every
+          occasion
         </p>
       </div>
 
@@ -57,9 +59,7 @@ export default function Services() {
 
       {/* Cards */}
       {filteredServices.length === 0 ? (
-        <p className="text-center text-base-content/60">
-          No services found
-        </p>
+        <p className="text-center text-base-content/60">No services found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {filteredServices.map((item, idx) => (
@@ -86,9 +86,7 @@ export default function Services() {
 
               {/* Content */}
               <div className="card-body space-y-3">
-                <h3 className="card-title text-base-content">
-                  {item.name}
-                </h3>
+                <h3 className="card-title text-base-content">{item.name}</h3>
 
                 <p className="text-sm text-base-content/70 line-clamp-2">
                   {item.description}
@@ -99,9 +97,12 @@ export default function Services() {
                     ৳ {item.price}
                   </span>
 
-                  <button className="btn btn-primary btn-sm rounded-full">
+                  <Link
+                    to={`/services/${item._id}`}
+                    className="btn btn-primary btn-sm rounded-full"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.article>

@@ -4,11 +4,14 @@ import Registration from "../Pages/Auth/Registration";
 import AuthLayout from "../Layouts/Auth/AuthLayout";
 import Home from "../Pages/Home/Home";
 import HomeLayout from "../Layouts/Home/HomeLayout";
-import About from './../Pages/About';
-import Contact from "../Pages/Contact";
+import About from '../Pages/page/About';
+import Contact from "../Pages/page/Contact";
 import PrivateRouter from "./Private/PrivateRouter";
 import DashboardLayouts from "../Layouts/Dashboard/DashboardLayouts";
-import Service from "../Pages/Service";
+
+import ServiceDetails from "../Pages/page/ServiceDetails";
+import Service from "../Pages/page/Service";
+import BookService from "../Pages/page/BookService";
 
 
 
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
         path: 'service',
         element: <PrivateRouter>
           <Service></Service>
+        </PrivateRouter>
+      },
+      {
+        path: 'services/:id',
+        element: <PrivateRouter>
+          <ServiceDetails></ServiceDetails>
+        </PrivateRouter>
+      },
+      {
+        path: 'book-service/:id',
+        element: <PrivateRouter>
+          <BookService></BookService>
         </PrivateRouter>
       }
       // {
