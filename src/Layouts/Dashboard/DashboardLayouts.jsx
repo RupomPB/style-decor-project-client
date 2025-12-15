@@ -45,7 +45,7 @@ const DashboardLayouts = () => {
             <span className="is-drawer-close:hidden">My Profile</span></NavLink>
         </li>
         <li>
-            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip='MyParcel' to="/dashboard/my-bookings">
+            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip='mybookings' to="/dashboard/my-bookings">
             <CiDeliveryTruck />
             <span className="is-drawer-close:hidden">My Bookings</span></NavLink>
         </li>

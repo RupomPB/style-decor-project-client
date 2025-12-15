@@ -12,6 +12,7 @@ import DashboardLayouts from "../Layouts/Dashboard/DashboardLayouts";
 import ServiceDetails from "../Pages/page/ServiceDetails";
 import Service from "../Pages/page/Service";
 import BookService from "../Pages/page/BookService";
+import MyBookings from "../Pages/Dashboard/MyBookings";
 
 
 
@@ -80,7 +81,8 @@ const router = createBrowserRouter([
     </PrivateRouter>,
     children:[
       {
-        
+       path: 'my-bookings',
+       element: <MyBookings></MyBookings>
       }
     ]
   }

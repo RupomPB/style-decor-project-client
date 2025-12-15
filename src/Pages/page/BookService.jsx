@@ -23,6 +23,7 @@ const BookService = () => {
     const bookingData = {
       ...data,
       serviceId: id,
+      serviceImage: service.image, 
       serviceName: service.name,
       userEmail: user.email,
       userName: user.displayName,
