@@ -6,8 +6,10 @@ import Home from "../Pages/Home/Home";
 import HomeLayout from "../Layouts/Home/HomeLayout";
 import About from './../Pages/About';
 import Contact from "../Pages/Contact";
-import ServiceMap from "../Pages/Home/Coverage";
-import Coverage from "../Pages/Home/Coverage";
+import PrivateRouter from "./Private/PrivateRouter";
+import DashboardLayouts from "../Layouts/Dashboard/DashboardLayouts";
+import Service from "../Pages/Service";
+
 
 
 const router = createBrowserRouter([
@@ -28,6 +30,12 @@ const router = createBrowserRouter([
         path: 'contact',
         element: <Contact></Contact>
       },
+      {
+        path: 'service',
+        element: <PrivateRouter>
+          <Service></Service>
+        </PrivateRouter>
+      }
       // {
       //   path: 'coverage',
       //   Component: Coverage,
@@ -50,6 +58,17 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"/dashboard",
+    element:<PrivateRouter>
+      <DashboardLayouts></DashboardLayouts>
+    </PrivateRouter>,
+    children:[
+      {
+        
+      }
+    ]
+  }
 ]);
 
 export default router;
