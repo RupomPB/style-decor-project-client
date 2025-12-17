@@ -6,6 +6,21 @@ const Payment = () => {
   const { id } = useParams();
   const axiosSecure = UseAxiosSecure();
 
+  const handlePayment= async()=>{
+    const paymentInfo ={
+      cost: booking.cost,
+      serviceId: booking.serviceId,
+      userEmail: booking.userEmail,
+      serviceName: booking.serviceName,
+    }
+
+    const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
+
+    console.log(res.data)
+    window.location.href = res.data.url;
+
+  }
+
   const { data: booking = {}, isLoading } = useQuery({
     queryKey: ["booking", id],
     queryFn: async () => {
@@ -88,7 +103,7 @@ const Payment = () => {
               </div>
             </div>
 
-            <button className="btn btn-primary w-full mt-6 rounded-full text-lg">
+            <button onClick={handlePayment} className="btn btn-primary w-full mt-6 rounded-full text-lg">
               Proceed to Payment
             </button>
 
