@@ -6,12 +6,13 @@ const Payment = () => {
   const { id } = useParams();
   const axiosSecure = UseAxiosSecure();
 
-  const handlePayment= async()=>{
+  const handlePayment= async(booking)=>{
     const paymentInfo ={
       cost: booking.cost,
       serviceId: booking.serviceId,
       userEmail: booking.userEmail,
       serviceName: booking.serviceName,
+      bookingId: booking._id,
     }
 
     const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
@@ -81,7 +82,8 @@ const Payment = () => {
             <div className="flex justify-between text-lg font-medium">
               <span>Total Amount</span>
               <span className="text-primary font-bold">
-                ৳ {booking.cost}
+                
+            $ {booking.cost}
               </span>
             </div>
           </div>
@@ -103,7 +105,7 @@ const Payment = () => {
               </div>
             </div>
 
-            <button onClick={handlePayment} className="btn btn-primary w-full mt-6 rounded-full text-lg">
+            <button onClick={()=>handlePayment(booking)} className="btn btn-primary w-full mt-6 rounded-full text-lg">
               Proceed to Payment
             </button>
 

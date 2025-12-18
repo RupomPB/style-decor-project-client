@@ -14,6 +14,8 @@ import Service from "../Pages/page/Service";
 import BookService from "../Pages/page/BookService";
 import MyBookings from "../Pages/Dashboard/MyBookings";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
+import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
 
 
 
@@ -88,6 +90,14 @@ const router = createBrowserRouter([
       {
         path: 'payment/:id',
         element: <Payment></Payment>
+      },
+      {
+        path: 'payment-success',
+        Component: PaymentSuccess
+      },
+      {
+        path: 'payment-cancelled',
+        Component: PaymentCancelled
       }
     ]
   }

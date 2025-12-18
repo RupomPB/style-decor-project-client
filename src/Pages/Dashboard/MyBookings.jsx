@@ -102,26 +102,35 @@ const MyBookings = () => {
                   <td className="max-w-[180px] truncate">{booking.location}</td>
                   <td className="font-medium">৳ {booking.cost}</td>
                   <td>
-                    <span className="badge badge-warning badge-outline">
-                      Pending
-                    </span>
+                    {booking.paymentStatus === "paid" ? (
+                      <span className="badge badge-success">
+                        Paid
+                        {booking.paymentTime && (
+                          <p className="text-xs">{new Date(booking.paymentTime).toLocaleString()}</p>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="badge badge-warning badge-outline">
+                        Pending
+                      </span>
+                    )}
                   </td>
                   <td className="text-center align-middle ">
-                  <div className="flex gap-2 justify-center">
-
-                    <button
-                      onClick={() => handlePayment(booking._id)}
-                      className="btn btn-sm btn-primary rounded-full"
-                    >
-                      Pay
-                    </button>
-                    <button
-                      onClick={() => handleCancel(booking._id)}
-                      className="btn btn-sm btn-outline btn-error rounded-full"
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                    <div className="flex gap-2 justify-center">
+                      <button
+                        onClick={() => handlePayment(booking._id)}
+                        className="btn btn-sm btn-primary rounded-full"
+                        disabled={booking.paymentStatus === "paid"}
+                      >
+                        Pay
+                      </button>
+                      <button
+                        onClick={() => handleCancel(booking._id)}
+                        className="btn btn-sm btn-outline btn-error rounded-full"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
