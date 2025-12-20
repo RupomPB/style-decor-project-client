@@ -16,6 +16,7 @@ import MyBookings from "../Pages/Dashboard/MyBookings";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
 
 
 
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: 'payment-cancelled',
         Component: PaymentCancelled
+      },
+      {
+        path: 'payment-history',
+        element:<PaymentHistory></PaymentHistory>
       }
     ]
   }

@@ -50,7 +50,7 @@ const DashboardLayouts = () => {
             <span className="is-drawer-close:hidden">My Bookings</span></NavLink>
         </li>
          <li>
-            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip='MyParcel' to="/dashboard/payment">
+            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip='PaymentHistory' to="/dashboard/payment-history">
             <CiDeliveryTruck />
             <span className="is-drawer-close:hidden">Payment History</span></NavLink>
         </li>

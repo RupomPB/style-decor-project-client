@@ -3,38 +3,50 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary:rgb(59, 175, 219);
+
+  --color-primary: rgb(59, 175, 219);
   --color-secondary: black;
-    --color-base-100: #ffffff;  /* main background */
+
+  --color-base-100: #ffffff;
   --color-base-200: #f1f5f9;
   --color-base-300: #e2e8f0;
 
-  --color-base-content: #020617; /* text color */
+  --color-base-content: #020617;
+
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
 }
 
 @plugin "daisyui/theme" {
   name: "dark";
 
---color-primary: rgb(59, 175, 219);   /* same brand color */
---color-secondary: #94a3b8; /* soft gray instead of pure white */
+  --color-primary: rgb(59, 175, 219);
+  --color-secondary: #94a3b8;
 
-  
-  --color-base-100: #020617;  /* dark background */
-  --color-base-200: #020617;
-  --color-base-300: #0f172a;
+  --color-base-100: #020617;
+  --color-base-200: #0f172a;
+  --color-base-300: #1e293b;
 
-  --color-base-content: #e5e7eb; /* light text */
+  --color-base-content: #e5e7eb;
+
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
 }
 
-
-.sand {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+@layer base {
+  body {
+    font-family: "Quicksand", sans-serif;
+  }
 }
 
 .btn-gradient {
-  background: linear-gradient(to right, rgb(94, 191, 230), rgb(71, 191, 183), rgb(12, 144, 245));
+  background: linear-gradient(
+    to right,
+    rgb(94, 191, 230),
+    rgb(71, 191, 183),
+    rgb(12, 144, 245)
+  );
   color: white;
 }
