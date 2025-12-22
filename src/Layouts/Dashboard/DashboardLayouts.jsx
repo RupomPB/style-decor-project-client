@@ -54,6 +54,11 @@ const DashboardLayouts = () => {
             <CiDeliveryTruck />
             <span className="is-drawer-close:hidden">Payment History</span></NavLink>
         </li>
+         <li>
+            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip='PaymentHistory' to="/dashboard/approve-decorators">
+            <CiDeliveryTruck />
+            <span className="is-drawer-close:hidden">Approve Decorators</span></NavLink>
+        </li>
 
         {/* List item */}
         <li>

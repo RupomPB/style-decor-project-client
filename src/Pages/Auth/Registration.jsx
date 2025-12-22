@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Registration = () => {
   const { createUser, updataUserProfile, setUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("in the register ", location);
+  const axiosSecure = UseAxiosSecure();
+  // console.log("in the register ", location);
 
   const {
     register,
@@ -17,12 +19,11 @@ const Registration = () => {
   } = useForm();
 
   const handleRegistration = (data) => {
-    console.log("after register", data);
+    // console.log("after register", data);
     const profileImg = data.photo[0];
 
     createUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
         const user = result.user;
 
         // 1 store the img in form data
@@ -35,12 +36,24 @@ const Registration = () => {
         }`;
 
         axios.post(image_API_URL, formData).then((res) => {
-          console.log("after image upload", res.data.data.url);
+          const photoURL =  res.data.data.url;
 
+          // create user in the database
+          const userInfo ={
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL
+          }
+          axiosSecure.post('/users', userInfo)
+          .then(res =>{
+            if(res.data.insertedId){
+              console.log('user created in the database')
+            }
+          })
           // updata user profile to firebase
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
           console.log(data.name);
 
@@ -52,7 +65,7 @@ const Registration = () => {
             .catch((error) => {
               console.log(error.message);
             });
-          setUser({ ...user, ...userProfile });
+          setUser({ ...user,displayName: data.name, photoURl: photoURL, ...userProfile });
         });
       })
       .catch((error) => {

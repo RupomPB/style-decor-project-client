@@ -17,6 +17,8 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
+import Decorator from "../Pages/Decorator/Decorator";
+import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators/ApproveDecorators";
 
 
 
@@ -55,6 +57,11 @@ const router = createBrowserRouter([
         element: <PrivateRouter>
           <BookService></BookService>
         </PrivateRouter>
+      },
+      {
+        path: 'decorator',
+        element: <PrivateRouter><Decorator></Decorator></PrivateRouter>,
+        loader: () => fetch("/serviceCenters.json").then((res) => res.json()),
       }
       // {
       //   path: 'coverage',
@@ -103,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: 'payment-history',
         element:<PaymentHistory></PaymentHistory>
+      },
+      {
+        path: 'approve-decorators',
+        element: <ApproveDecorators></ApproveDecorators>
       }
     ]
   }

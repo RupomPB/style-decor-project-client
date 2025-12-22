@@ -91,6 +91,9 @@ const Navbar = () => {
          <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/dashboard">
         <li>Dashboard</li>
       </NavLink>
+      <NavLink className={({isActive})=>`ml-5 ${isActive? "text-primary font-bold border-b-2 ": "text-primary "} `} to="/decorator">
+        <li>Become a Decorator</li>
+      </NavLink>
         </>
       )}
 
