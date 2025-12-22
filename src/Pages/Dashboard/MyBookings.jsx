@@ -74,12 +74,13 @@ const MyBookings = () => {
       ) : (
         <div className="overflow-x-auto bg-base-100 rounded-2xl shadow-lg border border-gray-200">
           <table className="table w-full table-zebra">
-            <thead className="bg-gray-100">
+            <thead className="">
               <tr>
                 <th className="text-left">Service</th>
                 <th>Date</th>
                 <th>Location</th>
                 <th>Cost</th>
+                <th>Payment</th>
                 <th>Status</th>
                 <th className="text-center">Action</th>
               </tr>
@@ -115,6 +116,7 @@ const MyBookings = () => {
                       </span>
                     )}
                   </td>
+                  <td>{booking.deliveryStatus}</td>
                   <td className="text-center align-middle ">
                     <div className="flex gap-2 justify-center">
                       <button

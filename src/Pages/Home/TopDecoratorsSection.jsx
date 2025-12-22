@@ -31,7 +31,7 @@ const TopDecoratorsSection = () => {
   const { data: decorators = [], isLoading } = useQuery({
     queryKey: ["top-decorators"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/decorators");
+      const res = await axiosSecure.get("/all-decorators");
       return res.data;
     },
   });

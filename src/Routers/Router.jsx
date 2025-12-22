@@ -19,6 +19,9 @@ import PaymentCancelled from "../Pages/Dashboard/Payment/PaymentCancelled";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
 import Decorator from "../Pages/Decorator/Decorator";
 import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators/ApproveDecorators";
+import UserManagement from "../Pages/Dashboard/UserManagement.jsx/UserManagement";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import AssignDecorators from "../Pages/Dashboard/AssignDecorators/AssignDecorators";
 
 
 
@@ -113,7 +116,18 @@ const router = createBrowserRouter([
       },
       {
         path: 'approve-decorators',
-        element: <ApproveDecorators></ApproveDecorators>
+        element: <AdminRoute><ApproveDecorators></ApproveDecorators></AdminRoute>
+      },
+      {
+        path: 'User-Management',
+
+        element: <AdminRoute><UserManagement></UserManagement></AdminRoute>
+      },
+      {
+        path:'assign-decorators',
+        element: <AdminRoute>
+          <AssignDecorators></AssignDecorators>
+        </AdminRoute>
       }
     ]
   }
