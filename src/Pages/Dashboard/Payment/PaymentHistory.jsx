@@ -11,8 +11,8 @@ const PaymentHistory = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["payments", user?.email],
-    enabled: !loading && !!user?.email,
+    queryKey: ["payments", user?.displayName],
+    enabled: !loading && user?.accessToken &&  !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments?email=${user.email}`);
       return res.data;

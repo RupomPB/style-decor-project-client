@@ -1,179 +1,183 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../../hooks/useRole";
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
 
 const DashboardLayouts = () => {
   const { role } = useRole();
+  const axiosSecure = UseAxiosSecure();
+  const [profile, setProfile] = useState(null);
+
+  // fetch profile data from backend
+  useEffect(() => {
+    axiosSecure
+      .get("/users/profile")
+      .then((res) => setProfile(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const navItem =
+    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all";
+  const activeNav = "bg-primary text-white shadow-md";
+  const inactiveNav = "text-base-content hover:bg-base-300";
 
   return (
-    <div className=" max-w-7xl mx-auto drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open max-w-7xl mx-auto min-h-screen">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Navbar */}
-        <nav className="navbar w-full bg-base-300">
+
+      {/* ================= CONTENT ================= */}
+      <div className="drawer-content flex flex-col">
+        {/* Top Navbar */}
+        <div className="sticky top-0 z-30 navbar bg-base-100 border-b">
           <label
             htmlFor="my-drawer-4"
-            aria-label="open sidebar"
-            className="btn btn-square btn-ghost"
+            className="btn btn-ghost btn-square lg:hidden"
           >
-            {/* Sidebar toggle icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
-              className="my-1.5 inline-block size-4"
-            >
-              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-              <path d="M9 4v16"></path>
-              <path d="M14 10l2 2l-2 2"></path>
-            </svg>
+            ☰
           </label>
-          <div className="px-4">Style Decor Dashboard</div>
-        </nav>
-        {/* Page content here */}
-        <Outlet></Outlet>
+          <h1 className="text-lg font-semibold px-2">
+            Style Decor Dashboard
+          </h1>
+        </div>
+
+        {/* Page Content */}
+        <div className="p-6 bg-base-200 min-h-screen space-y-6">
+          {/* ===== My Profile Card ===== */}
+          {profile && (
+            <div className="bg-base-100 rounded-xl shadow p-6 flex flex-col md:flex-row items-center md:items-start gap-6">
+              <img
+                src={profile.photoURL || "https://i.ibb.co/ZYW3VTp/brown-brim.png"}
+                alt="profile"
+                className="w-28 h-28 rounded-full object-cover border"
+              />
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold">
+                  {profile.name || profile.displayName || "User Name"}
+                </h3>
+                <p className="text-sm text-gray-500">{profile.email}</p>
+                <p className="text-sm text-gray-500">
+                  Phone: {profile.phone || "Not added"}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Address: {profile.address || "Not added"}
+                </p>
+                <span className="mt-2 badge badge-primary capitalize">
+                  {profile.role}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Outlet for nested routes */}
+          <div className="bg-base-100 rounded-xl shadow p-6">
+            <Outlet />
+          </div>
+        </div>
       </div>
 
-      <div className="drawer-side is-drawer-close:overflow-visible">
-        <label
-          htmlFor="my-drawer-4"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-          {/* Sidebar content here */}
-          <ul className="menu w-full grow">
-            {/* List item */}
+      {/* ================= SIDEBAR ================= */}
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+
+        <aside className="w-64 bg-base-100 border-r min-h-screen px-4 py-6">
+          {/* Brand */}
+          <div className="mb-6 text-center">
+            <h2 className="text-xl font-bold">Style Decor</h2>
+            <p className="text-xs text-gray-500">Admin Panel</p>
+          </div>
+
+          <ul className="space-y-1">
+            {/* Home */}
             <li>
-              <Link
-                to="/"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                </svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
+              <Link to="/" className={`${navItem} ${inactiveNav}`}>
+                🏠 Home
               </Link>
             </li>
-            {/* our dashboard links */}
+
+            <div className="divider my-3"></div>
+
+            {/* User Section */}
+            <p className="text-xs uppercase text-gray-400 px-2 mb-2">User</p>
 
             <li>
               <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="mybookings"
                 to="/dashboard/my-bookings"
+                className={({ isActive }) =>
+                  `${navItem} ${isActive ? activeNav : inactiveNav}`
+                }
               >
                 <CiDeliveryTruck />
-                <span className="is-drawer-close:hidden">My Bookings</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Payment History"
-                to="/dashboard/payment-history"
-              >
-                <CiDeliveryTruck />
-                <span className="is-drawer-close:hidden">Payment History</span>
+                My Bookings
               </NavLink>
             </li>
 
+            <li>
+              <NavLink
+                to="/dashboard/payment-history"
+                className={({ isActive }) =>
+                  `${navItem} ${isActive ? activeNav : inactiveNav}`
+                }
+              >
+                💳 Payment History
+              </NavLink>
+            </li>
+
+            {/* Admin Section */}
             {role === "admin" && (
               <>
+                <div className="divider my-3"></div>
+                <p className="text-xs uppercase text-gray-400 px-2 mb-2">
+                  Admin
+                </p>
+
                 <li>
                   <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Approve Decorators"
                     to="/dashboard/approve-decorators"
+                    className={({ isActive }) =>
+                      `${navItem} ${isActive ? activeNav : inactiveNav}`
+                    }
                   >
-                    <CiDeliveryTruck />
-                    <span className="is-drawer-close:hidden">
-                      Approve Decorators
-                    </span>
+                    ✅ Approve Decorators
                   </NavLink>
                 </li>
 
                 <li>
                   <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="User-Management"
                     to="/dashboard/user-management"
+                    className={({ isActive }) =>
+                      `${navItem} ${isActive ? activeNav : inactiveNav}`
+                    }
                   >
-                    <CiDeliveryTruck />
-                    <span className="is-drawer-close:hidden">
-                      User-Management
-                    </span>
+                    👥 User Management
                   </NavLink>
                 </li>
 
                 <li>
                   <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Statics"
                     to="/dashboard/statics"
+                    className={({ isActive }) =>
+                      `${navItem} ${isActive ? activeNav : inactiveNav}`
+                    }
                   >
-                    <CiDeliveryTruck />
-                    <span className="is-drawer-close:hidden">Statics</span>
+                    📊 Statics
                   </NavLink>
                 </li>
-                
+
                 <li>
                   <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assign Decorators"
                     to="/dashboard/assign-decorators"
+                    className={({ isActive }) =>
+                      `${navItem} ${isActive ? activeNav : inactiveNav}`
+                    }
                   >
-                    <CiDeliveryTruck />
-                    <span className="is-drawer-close:hidden">Statics</span>
+                    🎯 Assign Decorators
                   </NavLink>
                 </li>
               </>
             )}
-            
-
-            {/* List item */}
-            <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
-              >
-                {/* Settings icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M20 7h-9"></path>
-                  <path d="M14 17H5"></path>
-                  <circle cx="17" cy="17" r="3"></circle>
-                  <circle cx="7" cy="7" r="3"></circle>
-                </svg>
-              </button>
-            </li>
           </ul>
-        </div>
+        </aside>
       </div>
     </div>
   );

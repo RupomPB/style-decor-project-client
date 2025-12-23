@@ -3,17 +3,22 @@ import UseAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt, FaUserShield, FaUsers, FaUserTag } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const UserManagement = () => {
-  const axiosSecure = UseAxiosSecure();
 
-  const { data: users = [], refetch, isLoading } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
-    },
-  });
+  const axiosSecure = UseAxiosSecure();
+  const { user, loading } = useAuth(); 
+
+const { data: users = [], refetch, isLoading } = useQuery({
+  queryKey: ["users", user?.email],
+ 
+  enabled: !loading && user?.email && !!user?.email, 
+  queryFn: async () => {
+    const res = await axiosSecure.get("/users");
+    return res.data;
+  },
+});
 
   /* ---------- Admin Role Logic ---------- */
   const handleMakeAdmin = (user) => {

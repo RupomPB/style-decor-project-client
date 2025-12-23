@@ -22,6 +22,7 @@ import ApproveDecorators from "../Pages/Dashboard/ApproveDecorators/ApproveDecor
 import UserManagement from "../Pages/Dashboard/UserManagement.jsx/UserManagement";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import AssignDecorators from "../Pages/Dashboard/AssignDecorators/AssignDecorators";
+import MyProfile from "../Pages/page/MyProfile";
 
 
 
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
         path: 'decorator',
         element: <PrivateRouter><Decorator></Decorator></PrivateRouter>,
         loader: () => fetch("/serviceCenters.json").then((res) => res.json()),
+      },
+      {
+        path: 'profile',
+        element: <PrivateRouter><MyProfile></MyProfile></PrivateRouter>
       }
       // {
       //   path: 'coverage',
